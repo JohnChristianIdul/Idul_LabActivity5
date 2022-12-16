@@ -3,6 +3,7 @@ package LeapYear;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.InputMismatchException;
 
 public class LeapYearGUI extends JFrame{
     private JPanel pnlMain;
@@ -22,11 +23,17 @@ public class LeapYearGUI extends JFrame{
         btnCheckYear.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int year = Integer.parseInt(tfYear.getText());
-                if (year % 4 == 0) {
-                    JOptionPane.showMessageDialog(pnlMain, "Leap year");
-                } else {
-                    JOptionPane.showMessageDialog(pnlMain, "Not a leap year");
+                try {
+                    int year = Integer.parseInt(tfYear.getText());
+                    if (year % 4 == 0) {
+                        JOptionPane.showMessageDialog(pnlMain, "Leap year");
+                    } else {
+                        JOptionPane.showMessageDialog(pnlMain, "Not a leap year");
+                    }
+                }catch(NumberFormatException d){
+                    JOptionPane.showMessageDialog(pnlMain, "Cannot be empty");
+                }catch(InputMismatchException d) {
+                    JOptionPane.showMessageDialog(pnlMain, "Input a number");
                 }
             }
         });
