@@ -31,37 +31,49 @@ public class FoodOrderGUI extends JFrame{
         btnOrder.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double total = 0;
-                if (cPizza.isSelected()) {
-                    total += 100;
-                }
-                if (cBurger.isSelected()) {
-                    total += 80;
-                }
-                if(cFries.isSelected()) {
-                    total += 65;
-                }
-                if(cTea.isSelected()) {
-                    total += 50;
-                }
-                if(cSoftDrinks.isSelected()) {
-                    total += 55;
-                }
-                if(cSundae.isSelected()) {
-                    total += 40;
-                }
+                try {
+                    double total = 0;
+                    if (cPizza.isSelected()) {
+                        total += 100;
+                    }
+                    if (cBurger.isSelected()) {
+                        total += 80;
+                    }
+                    if (cFries.isSelected()) {
+                        total += 65;
+                    }
+                    if (cTea.isSelected()) {
+                        total += 50;
+                    }
+                    if (cSoftDrinks.isSelected()) {
+                        total += 55;
+                    }
+                    if (cSundae.isSelected()) {
+                        total += 40;
+                    }
 
-                if (rbNone.isSelected()) {
-                    JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f",total));
-                } else if (rb5.isSelected()) {
-                    total -= total * .05;
-                    JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f",total));
-                } else if (rb10.isSelected()) {
-                    total -= total * .10;
-                    JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f",total));
-                } else {
-                    total -= total * .15;
-                    JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f",total));
+                    if(total == 0) {
+                        throw new Exception("No order selected. Please select order");
+                    } else if (!rb5.isSelected() && !rbNone.isSelected() && !rb10.isSelected() && !rb15.isSelected()) {
+                        if (total != 0)
+                            throw new Exception("Please select discount");
+                    }
+
+                    if (rbNone.isSelected()) {
+                        JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f", total));
+                    } else if (rb5.isSelected()) {
+                        total -= total * .05;
+                        JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f", total));
+                    } else if (rb10.isSelected()) {
+                        total -= total * .10;
+                        JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f", total));
+                    } else {
+                        total -= total * .15;
+                        JOptionPane.showMessageDialog(pnlMain, "The total price is Php " + String.format("%.2f", total));
+                    }
+
+                }catch(Exception d){
+                    JOptionPane.showMessageDialog(pnlMain, d.getMessage());
                 }
             }
         });
