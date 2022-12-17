@@ -25,6 +25,9 @@ public class LeapYearGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 try {
                     int year = Integer.parseInt(tfYear.getText());
+                    if(year < 0){
+                        throw new Exception("Year cannot be negative");
+                    }
                     if (year % 4 == 0) {
                         JOptionPane.showMessageDialog(pnlMain, "Leap year");
                     } else {
@@ -34,6 +37,8 @@ public class LeapYearGUI extends JFrame{
                     JOptionPane.showMessageDialog(pnlMain, "Cannot be empty");
                 }catch(InputMismatchException d) {
                     JOptionPane.showMessageDialog(pnlMain, "Input a number");
+                }catch(Exception d){
+                    JOptionPane.showMessageDialog(pnlMain, d.getMessage());
                 }
             }
         });
